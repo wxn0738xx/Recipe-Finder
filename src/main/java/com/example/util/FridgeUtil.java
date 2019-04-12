@@ -14,8 +14,9 @@ public class FridgeUtil {
 
 	/**
 	 * read from fridge.csv, create fridge objects and store in fridgeList
+	 * @return 
 	 */
-	public static void readCsvFile(String filePath) {
+	public static ArrayList<Fridge> readCsvFile(String filePath) {
 		try {
 			ArrayList<String[]> csvList = new ArrayList<String[]>();
 			CsvReader reader = new CsvReader(filePath, ',', Charset.forName("GBK"));
@@ -41,6 +42,9 @@ public class FridgeUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return fridgeList;
 	}
+	
+
 
 }
