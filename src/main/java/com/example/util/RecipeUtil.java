@@ -50,13 +50,13 @@ public class RecipeUtil {
 			}
 		} catch (JsonIOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] " + e.toString());
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] " + e.toString());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[ERROR] " + e.toString());
 		}
 		return recipeList;
 	}

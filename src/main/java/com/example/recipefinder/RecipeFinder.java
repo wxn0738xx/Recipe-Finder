@@ -30,21 +30,24 @@ public class RecipeFinder {
 
 	public static void main(String[] args) {
 		
-		try {
-			getFilesPath();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-			getFridgeList();
-		getRecipeList();
+			try {
+				getFilesPath();
+
+				getFridgeList();
+getRecipeList();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("[ERROR] " + e.toString());
+			}
 		
 
 		
 		if (fridgeList.size() == 0 || recipeList.size() == 0) {
 			System.out.println("Wrong file path or empty file");
-		} else {
+		}
+		
+		else {
 			getReadyRecipes();
 
 			if (recommandRecipeList.size() == 0) {
@@ -79,7 +82,7 @@ public class RecipeFinder {
 
 	}
 
-	private static void getFridgeList() {
+	private static void getFridgeList()throws Exception {
 		Date now = new Date();
 //getFridgeList
 		fridgeList = FridgeUtil.readCsvFile(fridgePath);
@@ -93,7 +96,7 @@ public class RecipeFinder {
 		}
 	}
 
-	private static void getRecipeList() {
+	private static void getRecipeList()throws Exception {
 //		recipeList = RecipeUtil.getRecipes("./recipe.json");
 		recipeList = RecipeUtil.getRecipes(recipePath);
 	}

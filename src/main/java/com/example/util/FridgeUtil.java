@@ -40,7 +40,7 @@ public class FridgeUtil {
 			}
 //			System.out.println(fridgeList);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("[ERROR] " + e.toString());
 		}
 		return fridgeList;
 	}
