@@ -1,5 +1,5 @@
 # Recipe-Finder
-1. To run the code, use command *java -jar RecipeFinder.jar*
+1. To run the code, use command **java -jar RecipeFinder.jar**
 2. Then you need to type the file path of *fridge.csv* and *recipe.json*
 3. There are multiple csv files to test:
 * *fridge_equaldate.csv* : In this file, all ingredients have equal and valid use-by date. Since dates are same, output will contains all of available recipes.
