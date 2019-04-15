@@ -20,7 +20,9 @@ import com.google.gson.JsonSyntaxException;
 
 public class RecipeUtil {
 	public static ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
-
+/**
+ * read from recipe.json and create recipe
+ * */
 	public static ArrayList<Recipe> getRecipes(String filePath) {
 		JsonParser parser = new JsonParser();
 		JsonArray array;
@@ -59,11 +61,5 @@ public class RecipeUtil {
 			System.out.println("[ERROR] " + e.toString());
 		}
 		return recipeList;
-	}
-//	
-
-	public static void main(String[] args) {
-		getRecipes("recipe.json");
-
 	}
 }

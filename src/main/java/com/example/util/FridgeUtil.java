@@ -1,50 +1,52 @@
 package com.example.util;
 
-import java.nio.charset.Charset;
+import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Scanner;
 
-import com.csvreader.CsvReader;
 import com.example.model.Fridge;
 import com.example.model.Unit;
 
 public class FridgeUtil {
+	private static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+
 	public static ArrayList<Fridge> fridgeList = new ArrayList<Fridge>();
 
 	/**
 	 * read from fridge.csv, create fridge objects and store in fridgeList
-	 * @return 
+	 * 
 	 */
-	public static ArrayList<Fridge> readCsvFile(String filePath) {
-		try {
-			ArrayList<String[]> csvList = new ArrayList<String[]>();
-			CsvReader reader = new CsvReader(filePath, ',', Charset.forName("GBK"));
 
-			while (reader.readRecord()) {
-				csvList.add(reader.getValues()); // 按行读取，并把每一行的数据添加到list集合
+	public static List<Fridge> getFridge(String fridgePath) throws Exception {
+
+		try (Scanner scanner = new Scanner(new FileInputStream(fridgePath));) {
+
+			while (scanner.hasNextLine()) {
+				fridgeList.add(setFridge(scanner.nextLine()));
 			}
-			reader.close();
-			for (int row = 0; row < csvList.size(); row++) {
 
-				Fridge fridge = new Fridge();
-
-				fridge.setItem(csvList.get(row)[0]);
-				fridge.setAmount(Integer.parseInt(csvList.get(row)[1]));
-				fridge.setUnit(Unit.valueOf(csvList.get(row)[2]));
-				SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-				Date useBy = dateFormatter.parse(csvList.get(row)[3]);
-				fridge.setUseBy(useBy);
-				fridgeList.add(fridge);
-
-			}
-//			System.out.println(fridgeList);
 		} catch (Exception e) {
 			System.out.println("[ERROR] " + e.toString());
 		}
 		return fridgeList;
 	}
-	
 
+	public static Fridge setFridge(String data) throws Exception {
+
+		String[] records = data.split(",");
+
+		Fridge fridge = new Fridge();
+		
+		fridge.setItem(records[0]);
+		fridge.setAmount(Integer.parseInt(records[1]));
+		fridge.setUnit(Unit.valueOf(records[2]));
+		Date useBy = dateFormatter.parse(records[3]);
+		fridge.setUseBy(useBy);
+
+		return fridge;
+	}
 
 }
